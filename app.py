@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
 
-# الأحرف المستخدمة حسب درجة السطوع
+# the marks that uses as brights
 ASCII_CHARS = "@%#*+=-:. "
 
 def resize_image(image, new_width=100):
@@ -14,7 +14,7 @@ def resize_image(image, new_width=100):
     return image.resize((new_width, new_height))
 
 def grayify(image):
-    return image.convert("L")  # رمادي
+    return image.convert("L")  # gray
 
 def pixels_to_ascii(image):
     pixels = np.array(image).astype(int)
@@ -37,7 +37,7 @@ def convert_image_to_ascii(path, new_width=100):
     ascii_art = pixels_to_ascii(image)
     return ascii_art
 
-# ========== واجهة رسومية بسيطة ==========
+# ========== simple GUI ==========
 def open_image():
     file_path = filedialog.askopenfilename(
         filetypes=[("Image files", "*.jpg *.jpeg *.png *.bmp *.webp")]
@@ -50,23 +50,23 @@ def open_image():
         output.delete("1.0", tk.END)
         output.insert(tk.END, ascii_art)
 
-        # حفظ الناتج في ملف
+        # save the output in file
         with open("ascii_output.txt", "w", encoding="utf-8") as f:
             f.write(ascii_art)
 
         messagebox.showinfo("Success", "Image converted to ASCII and saved as ascii_output.txt")
 
-# إعداد النافذة
+# GUI setup
 root = tk.Tk()
 root.title("Image to ASCII Art by Nalonary")
 root.geometry("800x600")
 
-btn = tk.Button(root, text="🖼️ اختر صورة", font=("Arial", 14), command=open_image)
+btn = tk.Button(root, text="🖼️ select image", font=("Arial", 14), command=open_image)
 btn.pack(pady=10)
 
 output = tk.Text(root, bg="black", fg="white", font=("Courier", 6), wrap=tk.NONE)
 output.pack(expand=True, fill="both")
 
 root.mainloop()
-# تم إنشاء هذا البرنامج لتحويل الصور إلى فن ASCII باستخدام مكتبة PIL وTkinter
-# تأكد من تثبيت المكتبات المطلوبة باستخدام:
+# this simple app uses PIL وTkinter
+# make sure to downlaoad the libraries for this app:
